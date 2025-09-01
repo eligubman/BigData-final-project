@@ -1,0 +1,74 @@
+# Big Data : Week 7 Recommendation System
+# GitHub Repo: https://github.com/eligubman/BigData-final-project
+
+# Eliyahu Gubman 213662364
+# Yair Levi 213200199
+
+# Date 9 Sep 2025
+
+a) 278858
+b) 270551
+c) 1144627
+d) 
+
+num_ratings  bin_size
+-----------  --------
+1            58973   
+2            12476   
+3            6529    
+4            4247    
+5            3096    
+6            2345    
+7            1706    
+8            1371    
+9            1175    
+10           1049  
+... # see more in the basic.v1.txt file
+
+e)
+
+num_ratings  bin_size
+-----------  --------
+1            196437  
+2            59509   
+3            25893   
+4            14073   
+5            8981    
+6            6091    
+7            4465    
+8            3267    
+9            2572    
+10           2143 
+... # see more in the basic.v1.txt file
+
+# for the histogram there is a plot rendered in pdf in the output folder
+
+f) 
+
+Book-Title                                          rating_count
+--------------------------------------------------  ------------
+Wild Animus                                         2502        
+The Lovely Bones: A Novel                           1295        
+The Da Vinci Code                                   883         
+Divine Secrets of the Ya-Ya Sisterhood: A Novel     732         
+The Red Tent (Bestselling Backlist)                 723         
+A Painted House                                     647         
+The Secret Life of Bees                             615         
+Snow Falling on Cedars                              614         
+Angels &amp; Demons                                 586         
+Where the Heart Is (Oprah's Book Club (Paperback))  585      
+
+g)
+
+User-ID  N    
+-------  -----
+11676    13549
+198711   7521 
+153662   6095 
+98391    5876 
+35859    5828 
+212898   4766 
+278418   4510 
+76352    3356 
+110973   3090 
+235105   3056 

@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# create the database using the script
+echo "Creating the database"
+sqlite3 "BX_db_test.sqlite" < "BX_Sqlite_Creates/BX_Creates.sql"
+echo "Database created"
+
+# populate the database using the script
+echo "Populating the database"
+echo "Users"
+# insert only 10_000 lines in the Users table to avoid memory issue
+# head -n 10000 "BX_Sqlite_Inserts/BX-Users_Insert.sql" > "BX_Sqlite_Inserts/BX-Users_Insert_10k.sql"
+sqlite3 "BX_db_test.sqlite"< "BX_Sqlite_Inserts/BX-Users_Insert.sql"
+# check for errors
+if [ $? -ne 0 ]; then
+    echo "Error populating the Users table"
+    exit 1
+fi
+
+echo "Books"
+# head -n 10000 "BX_Sqlite_Inserts/BX-Books_Insert.sql" > "BX_Sqlite_Inserts/BX-Books_Insert_10k.sql"
+sqlite3 "BX_db_test.sqlite"< "BX_Sqlite_Inserts/BX-Books_Insert.sql"
+# check for errors
+if [ $? -ne 0 ]; then
+    echo "Error populating the Books table"
+    exit 1
+fi
+
+echo "Book-Ratings"
+# head -n 10000 "BX_Sqlite_Inserts/BX-Books-Ratings_Insert.sql" > "BX_Sqlite_Inserts/BX-Book-Ratings_Insert_10k.sql"
+sqlite3 "BX_db_test.sqlite"< "BX_Sqlite_Inserts/BX-Books-Ratings_Insert.sql"
+# check for errors
+if [ $? -ne 0 ]; then
+    echo "Error populating the Book-Ratings table"
+    exit 1
+fi
+
+# query the database to check if the amount of lines in the tables are correct
+echo "Users"
+sqlite3 "BX_db_test.sqlite" < "BX_Sqlite_Queries/BX-Users_Query.sql"
+
+wc -l "BX_Sqlite_Inserts/BX-Users_Insert.sql"
+
+echo "Books"
+sqlite3 "BX_db_test.sqlite" < "BX_Sqlite_Queries/BX-Books_Query.sql"
+
+wc -l "BX_Sqlite_Inserts/BX-Books_Insert.sql"
+
+echo "Book-Ratings"
+sqlite3 "BX_db_test.sqlite" < "BX_Sqlite_Queries/BX-Book-Ratings_Query.sql"
+
+wc -l "BX_Sqlite_Inserts/BX-Books-Ratings_Insert.sql"

@@ -1,0 +1,41 @@
+```{r}
+library(RSQLite) # connecting to the database
+library(sqldf) # transforming sql into R dataframes
+library(recommenderlab) # recommender system
+library(stringr) # string manipulation
+library(ggplot2) # plotting
+library(qpcR) # quantile regression
+```
+
+```{r}
+con <- dbConnect(SQLite(), dbname="../BX_db.sqlite")
+```
+
+```{r}
+print(dbListTables(con))
+```
+
+```{r}
+# Check the number of records in each table
+users.length <- dbGetQuery(con, "SELECT COUNT(*) FROM 'BX-Users'")
+books.length <- dbGetQuery(con, "SELECT COUNT(*) FROM 'BX-Books'")
+ratings.length <- dbGetQuery(con, "SELECT COUNT(*) FROM 'BX-Book-Ratings'")
+
+print(paste("number of users: ", users.length))
+print(paste("number of books: ", books.length))
+print(paste("number of ratings: ", ratings.length))
+```
+```{r}
+ratings <- dbGetQuery(con, "SELECT * FROM 'BX-Book-Ratings'")
+```
+
+```{r}
+# books with ratings in sqlite syntax
+books_with_ratings <- sqldf("SELECT ISBN FROM ratings GROUP BY ISBN HAVING COUNT(*) > 30;")
+people_with_ratings <- sqldf("SELECT 'User-ID' FROM ratings GROUP BY 'User-ID' HAVING COUNT(*) > 30 AND COUNT(*) < 300;")
+ratings <- sqldf("SELECT * FROM ratings WHERE 'User-ID' IN people_with_ratings AND ISBN IN books_with_ratings;")
+```
+
+```{r}
+View(ratings)
+```

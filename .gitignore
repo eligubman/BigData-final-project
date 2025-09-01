@@ -1,0 +1,17 @@
+.DS_Store
+.Rproj.user
+.Rhistory
+
+# remove all file ending in .db
+*.db
+
+# remove all files ending in .RData
+*.RData
+
+# remove folder .idea
+.idea
+
+# remove folder .vscode
+.vscode
+
+*.sqlite
